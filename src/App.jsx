@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home';
@@ -15,6 +16,7 @@ function App() {
         <Route path="/cardapio" element={<Cardapio />} />
         <Route path="/sobre" element={<About />} />
       </Routes>
+      <Footer></Footer>
     </>
   );
 }
