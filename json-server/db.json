@@ -1,0 +1,46 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "João",
+      "email": "j@mail.com"
+    },
+    {
+      "nome": "José",
+      "email": "js@mail.com",
+      "id": 2
+    },
+    {
+      "nome": "José 3",
+      "email": "js@mail.com",
+      "id": 3
+    },
+    {
+      "nome": "José 4",
+      "email": "js@mail.com",
+      "id": 4
+    },
+    {
+      "nome": "José 5",
+      "email": "js@mail.com",
+      "id": 5
+    },
+    {
+      "nome": "José 6",
+      "email": "js@mail.com",
+      "id": 6
+    },
+    {
+      "nome": "José 7",
+      "email": "js@mail.com",
+      "id": 7
+    },
+    {
+      "nome": "José 8",
+      "email": "js@mail.com",
+      "id": 8
+    }
+  ],
+  "produtos": [],
+  "cardapios": []
+}
