@@ -1,13 +1,47 @@
-import { useState } from 'react';
-import users from '../dataset/user';
-import { Container, Table } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Container, Table, Form, Button } from 'react-bootstrap';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 const Cardapio = () => {
+  const [nome, setNome] = useState('');
+
   const [usuarios, setUsuarios] = useState(users);
+
+  const handleClick = (event) => {
+    console.log('clicou! ' + nome);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('submeteu! ' + nome);
+  };
+
+  useEffect(() => {
+    //requisição.
+  }, []);
 
   return (
     <>
+      <Container>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Nome</Form.Label>
+            <Form.Control
+              value={nome}
+              type="text"
+              placeholder="Digite o nome da Preparação"
+              onChange={(event) => setNome(event.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="button" onClick={handleClick}>
+            Buscar
+          </Button>
+
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Container>
       <Container className="mt-3">
         <Table striped bordered hover>
           <thead>
