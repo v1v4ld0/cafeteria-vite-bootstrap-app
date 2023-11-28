@@ -1,19 +1,29 @@
 import { useEffect, useState } from 'react';
-import { Container, Table, Form, Button } from 'react-bootstrap';
+import { Container, Table, Form, Button, Modal } from 'react-bootstrap';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 const Cardapio = () => {
-  const [nome, setNome] = useState('');
+  const [show, setShow] = useState(false);
 
-  const [usuarios, setUsuarios] = useState(users);
+  const [inputs, setInputs] = useState({});
+
+  const [usuarios, setUsuarios] = useState([]);
 
   const handleClick = (event) => {
-    console.log('clicou! ' + nome);
+    console.log('clicou! ');
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('submeteu! ' + nome);
+    console.log(inputs);
+  };
+
+  const handleChange = (event) => {
+    setInputs({ ...inputs, [event.target.name]: event.target.value });
+  };
+
+  const handleModal = () => {
+    setShow(!show);
   };
 
   useEffect(() => {
@@ -23,14 +33,85 @@ const Cardapio = () => {
   return (
     <>
       <Container>
+        <Button variant="primary" onClick={handleModal}>
+          +
+        </Button>
+
+        <Modal show={show} onHide={handleModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Usuário</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>Nome</Form.Label>
+                <Form.Control
+                  name="nome"
+                  value={inputs.nome || ''}
+                  type="text"
+                  placeholder="Digite o nome da Preparação"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Sobrenome</Form.Label>
+                <Form.Control
+                  name="sobrenome"
+                  value={inputs.sobrenome || ''}
+                  type="text"
+                  placeholder="Digite o nome da Preparação"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>CPF</Form.Label>
+                <Form.Control
+                  name="cpf"
+                  value={inputs.cpf || ''}
+                  type="text"
+                  placeholder="Digite o nome da Preparação"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Celular</Form.Label>
+                <Form.Control
+                  name="celular"
+                  value={inputs.celular || ''}
+                  type="text"
+                  placeholder="Digite o nome da Preparação"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Button variant="primary" type="button" onClick={handleClick}>
+                Buscar
+              </Button>
+
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleModal}>
+              Fechar
+            </Button>
+            <Button variant="primary" onClick={handleModal}>
+              Salvar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Container>
+      <Container>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Nome</Form.Label>
+            <Form.Label>Busca</Form.Label>
             <Form.Control
-              value={nome}
+              name="consulta"
+              value={inputs.consulta || ''}
               type="text"
-              placeholder="Digite o nome da Preparação"
-              onChange={(event) => setNome(event.target.value)}
+              placeholder="Digite um valor para buscar"
+              onChange={handleChange}
             />
           </Form.Group>
           <Button variant="primary" type="button" onClick={handleClick}>
