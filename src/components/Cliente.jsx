@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Container, Table, Form, Button, Modal } from 'react-bootstrap';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
-const Cardapio = () => {
+const Cliente = () => {
   const [show, setShow] = useState(false);
 
   const [inputs, setInputs] = useState({});
@@ -169,4 +169,4 @@ const Cardapio = () => {
   );
 };
 
-export default Cardapio;
+export default Cliente;

@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home';
 import Cardapio from './components/Cardapio';
 import About from './components/About';
+import Cliente from './components/Cliente';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cardapio" element={<Cardapio />} />
+        <Route path="/clientes" element={<Cliente />} />
         <Route path="/sobre" element={<About />} />
       </Routes>
       <Footer></Footer>
