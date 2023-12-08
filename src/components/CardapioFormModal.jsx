@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Container, Table, Form, Button, Modal } from 'react-bootstrap';
+import { useState } from 'react';
+import { Form, Button, Modal } from 'react-bootstrap';
 
-const CardapioFormModal = ({ show, handleModal }) => {
+const CardapioFormModal = ({ show, handleModal, cardapios, setCardapios }) => {
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -10,67 +10,85 @@ const CardapioFormModal = ({ show, handleModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    let cardapio = {...inputs};
     console.log(inputs);
+
+    fetch('http://localhost:3000/cardapios', {
+      method: 'POST',
+      body: JSON.stringify(cardapio),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    .then((response) => {
+      if(!response.ok){
+        console.log('Cadastrou');
+        setCardapios([...cardapios, cardapio])
+      }
+    })
+    .catch((error) => {});
   };
 
   return (
     <>
       <Modal show={show} onHide={handleModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Usuário</Modal.Title>
+          <Modal.Title>Cardápio</Modal.Title>
         </Modal.Header>
+        <Form onSubmit={handleSubmit}>
+
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Nome</Form.Label>
+              <Form.Label>Título</Form.Label>
               <Form.Control
-                name="nome"
-                value={inputs.nome || ''}
+                name="titulo"
+                value={inputs.titulo || ''}
                 type="text"
-                placeholder="Digite o nome da Preparação"
+                placeholder="Digite o título da Preparação"
                 onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Sobrenome</Form.Label>
+              <Form.Label>Descrição</Form.Label>
               <Form.Control
-                name="sobrenome"
-                value={inputs.sobrenome || ''}
+                name="descricao"
+                value={inputs.descricao || ''}
                 type="text"
-                placeholder="Digite o nome da Preparação"
+                placeholder="Digite o descrição da Preparação"
                 onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>CPF</Form.Label>
+              <Form.Label>Imagem</Form.Label>
               <Form.Control
-                name="cpf"
-                value={inputs.cpf || ''}
+                name="imagem"
+                value={inputs.imagem || ''}
                 type="text"
-                placeholder="Digite o nome da Preparação"
+                placeholder="Link/URL da imagem da Preparação"
                 onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Celular</Form.Label>
+              <Form.Label>Preço</Form.Label>
               <Form.Control
-                name="celular"
-                value={inputs.celular || ''}
+                name="preco"
+                value={inputs.preco || ''}
                 type="text"
-                placeholder="Digite o nome da Preparação"
+                placeholder="Digite o preço da Preparação"
                 onChange={handleChange}
               />
             </Form.Group>
-          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModal}>
             Fechar
           </Button>
-          <Button variant="primary" onClick={handleModal}>
+          <Button type="submit" variant="primary" onClick={handleModal}>
             Salvar
           </Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );

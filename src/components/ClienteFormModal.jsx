@@ -14,7 +14,7 @@ const ClienteFormModal = ({ show, handleModal, clientes, setClientes }) => {
     // Enviar os dados para o servidor.
     let cliente = { ...inputs };
     console.log(cliente);
-    fetch('http://localhost:5000/clientes', {
+    fetch('http://localhost:3000/clientes', {
       method: 'POST',
       body: JSON.stringify(cliente),
       headers: {

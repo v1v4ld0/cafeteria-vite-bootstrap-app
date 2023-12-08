@@ -7,7 +7,7 @@ const Cardapio = () => {
 
   const [consulta, setConsulta] = useState('');
 
-  const [clientes, setClientes] = useState([]);
+  const [cardapios, setCardapios] = useState([]);
 
   const handleModal = () => {
     setShow(!show);
@@ -19,7 +19,7 @@ const Cardapio = () => {
 
   useEffect(() => {
     //requisição get.
-    let jsonPromise = fetch('http://localhost:5000/clientes')
+    let jsonPromise = fetch('http://localhost:3000/cardapios')
       .then((response) => {
         console.log(response.ok);
         return response.json();
@@ -27,7 +27,7 @@ const Cardapio = () => {
       .catch((error) => {});
 
     jsonPromise.then((data) => {
-      setClientes([...data]);
+      setCardapios([...data]);
     });
   }, []);
 
@@ -51,7 +51,6 @@ const Cardapio = () => {
               value={consulta || ''}
               type="text"
               placeholder="Digite um valor para buscar"
-              // onChange={handleChange}
             />
           </Form.Group>
           <Button variant="primary" type="button" onClick={handleClick}>
@@ -63,20 +62,18 @@ const Cardapio = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Sobrenome</th>
-              <th>CPF</th>
-              <th>E-mail</th>
+              <th>Título</th>
+              <th>Descrição</th>
+              <th>Preço</th>
             </tr>
           </thead>
           <tbody>
-            {clientes.map((cliente, i) => {
+            {cardapios.map((cardapio, i) => {
               return (
                 <tr key={i}>
-                  <td>{cliente.nome}</td>
-                  <td>{cliente.sobrenome}</td>
-                  <td>{cliente.cpf}</td>
-                  <td>{cliente.email}</td>
+                  <td>{cardapio.titulo}</td>
+                  <td>{cardapio.descricao}</td>
+                  <td>{cardapio.preco}</td>
                 </tr>
               );
             })}

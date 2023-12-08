@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Table, Form, Button, Modal } from 'react-bootstrap';
+import { Container, Table, Form, Button } from 'react-bootstrap';
 import ClienteFormModal from './ClienteFormModal';
 
 const Cliente = () => {
@@ -22,7 +22,7 @@ const Cliente = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:5000/clientes', { method: 'GET' })
+    fetch('http://localhost:3000/clientes', { method: 'GET' })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`${response.status} ${response.statusText}`);
